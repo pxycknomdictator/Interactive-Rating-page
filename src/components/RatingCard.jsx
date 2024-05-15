@@ -1,11 +1,18 @@
 import React from "react";
 import star from "../../public/images/icon-star.svg";
 
-const RatingCard = () => {
+const RatingCard = ({ setRating, setShow, rating }) => {
   const ratings = [1, 2, 3, 4, 5];
 
+  const getValues = (event) => {
+    setRating(event.target.innerText);
+  };
+
+  const submitData = () => {
+    !(rating === undefined) ? setShow(true) : alert("Please Rate us first");
+  };
   return (
-    <div className="bg-cardBG w-[350px] sm:w-[400px] rounded-[2rem] p-[1.7rem]">
+    <div className="fadeAnimation bg-cardBG w-[350px] sm:w-[400px] rounded-[2rem] p-[1.7rem]">
       <div className="bg-activecircleBG bg-opacity-10 cursor-pointer w-12 h-12 grid place-items-center rounded-full">
         <img src={star} alt="star" />
       </div>
@@ -17,6 +24,7 @@ const RatingCard = () => {
       <div className="flex justify-between items-center mb-8">
         {ratings.map((numbers, index) => (
           <span
+            onClick={getValues}
             key={index}
             className="w-12 h-12 grid place-items-center rounded-full text-description text-LightGrey bg-cricleBG hover:bg-Orange hover:text-white transition-all cursor-pointer active:bg-activecircleBG"
           >
@@ -26,6 +34,7 @@ const RatingCard = () => {
       </div>
       <div className="w-full flex items-center justify-center">
         <input
+          onClick={submitData}
           type="submit"
           className="w-[88%] rounded-full text-white bg-Orange py-2 font-semibold hover:bg-white hover:text-Orange transition-all cursor-pointer"
           value="SUBMIT"
